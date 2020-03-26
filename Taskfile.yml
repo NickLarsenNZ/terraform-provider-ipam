@@ -29,3 +29,14 @@ tasks:
       - mkdir -p {{.TERRAFORM_PLUGINS_DIR}}
       - cp {{.BIN}} {{.TERRAFORM_PLUGINS_DIR}}
     silent: true
+
+  example:
+    deps: [install]
+    dir: example
+    env:
+      TF_INPUT: "0"
+      TF_IN_AUTOMATION: "1"
+      #TF_LOG: WARN
+    cmds:
+      - terraform init -get-plugins=false
+      - terraform plan
