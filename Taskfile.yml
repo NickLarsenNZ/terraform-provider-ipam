@@ -1,0 +1,31 @@
+version: '2'
+
+vars:
+  BIN: terraform-provider-ipam_v0.0.0
+  TERRAFORM_PLUGINS_DIR: ~/.terraform.d/plugins
+
+tasks:
+  build:
+    # Don't build if the sources haven't changed
+    sources:
+      - ./**/*.go
+      - go.mod
+      - go.sum
+    # Don't build if the generated file exists (and hasn't changed)
+    generates:
+      - "{{.BIN}}"
+    cmds:
+      - go build -o {{.BIN}}
+    silent: true
+
+  validate:
+    deps: [build]
+    cmds:
+      - ./{{.BIN}}
+
+  install:
+    deps: [build]
+    cmds:
+      - mkdir -p {{.TERRAFORM_PLUGINS_DIR}}
+      - cp {{.BIN}} {{.TERRAFORM_PLUGINS_DIR}}
+    silent: true
