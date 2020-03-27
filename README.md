@@ -30,6 +30,8 @@ _Eventually this will be auto-built using Github Actions, but for now you can bu
 
 ### Develop
 
+See <Taskfile.yml> for all tasks that can be run.
+
 Continuously run tests as you develop
 
 ```sh
@@ -44,10 +46,10 @@ Install the plugin locally `~/.terraform.d/plugins/`
 task install
 ```
 
-### External Test
+### Run example module
 
 Runs a `terraform plan` against the module in `example/`
 
 ```sh
-task validate
+task example
 ```
