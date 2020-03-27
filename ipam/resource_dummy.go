@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform/helper/schema"
 	"io/ioutil"
-
-	//"io/ioutil"
 	"os"
 )
 
@@ -48,15 +46,15 @@ func resourceDummy() *schema.Resource {
 }
 
 func resourceDummyCreate(d *schema.ResourceData, meta interface{}) error {
-	//path := d.Get("path").(string)
+	path := d.Get("path").(string)
 	firstline := d.Get("firstline").(string)
 	secondline := d.Get("secondline").(string)
 	contents := []byte(fmt.Sprintf("%s\n%s\n", firstline, secondline))
 
-	//err := ioutil.WriteFile(path, contents, 0644)
-	//if err != nil {
-	//	return err
-	//}
+	err := ioutil.WriteFile(path, contents, 0644)
+	if err != nil {
+		return err
+	}
 
 	checksum := sha1.Sum([]byte(contents))
 	hash := hex.EncodeToString(checksum[:])

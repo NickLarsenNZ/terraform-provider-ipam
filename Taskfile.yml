@@ -19,6 +19,10 @@ tasks:
     silent: true
 
   test:
+    sources:
+      - ./**/*.go
+      - go.mod
+      - go.sum
     cmds:
       - go test ./...
 
