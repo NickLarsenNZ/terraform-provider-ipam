@@ -18,6 +18,10 @@ tasks:
       - go build -o {{.BIN}}
     silent: true
 
+  test:
+    cmds:
+      - go test ./...
+
   validate:
     deps: [build]
     cmds:
