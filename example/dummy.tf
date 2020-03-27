@@ -1,5 +1,7 @@
 provider "ipam" {}
 
 resource "ipam_dummy" "d" {
-  path = "./thefile.txt"
+  path       = "./thefile.txt"
+  firstline  = "alpha"
+  secondline = "bravo"
 }
