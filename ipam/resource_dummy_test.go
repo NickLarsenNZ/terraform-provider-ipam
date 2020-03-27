@@ -26,19 +26,21 @@ const (
 
 func TestIpamResourceDummy(t *testing.T) {
 	expectedContent := fmt.Sprintf("%s\n%s\n", firstline, secondline)
+	renderedConfig := fmt.Sprintf(ipamDummyConfig, path, firstline, secondline)
 
 	r.UnitTest(t, r.TestCase{
 		Providers: testProviders,
 		Steps: []r.TestStep{
 			{
-				Config: fmt.Sprintf(ipamDummyConfig, path, firstline, secondline),
+				Config: renderedConfig,
 				Check: func(s *terraform.State) error {
 					content, err := ioutil.ReadFile(path)
 					if err != nil {
-						return fmt.Errorf("template:\n%s\ngot:\n%s\nexpected:\n%s\n", ipamDummyConfig, content, expectedContent)
+						return err
+						//return fmt.Errorf("was an error\ntemplate:\n%s\ngot:\n%s\nexpected:\n%s\n", renderedConfig, content, expectedContent)
 					}
 					if string(content) != expectedContent {
-						return fmt.Errorf("template:\n%s\ngot:\n%s\nexpected:\n%s\n", ipamDummyConfig, content, expectedContent)
+						return fmt.Errorf("template:\n%s\ngot:\n%s\nexpected:\n%s\n", renderedConfig, content, expectedContent)
 					}
 					return nil
 				},
