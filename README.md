@@ -30,7 +30,7 @@ _Eventually this will be auto-built using Github Actions, but for now you can bu
 
 ### Develop
 
-See <Taskfile.yml> for all tasks that can be run.
+See [Taskfile.yml](Taskfile.yml) for all tasks that can be run.
 
 Continuously run tests as you develop
 
