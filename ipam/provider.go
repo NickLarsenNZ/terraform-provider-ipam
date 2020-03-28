@@ -5,6 +5,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 	"github.com/nicklarsennz/terraform-provider-ipam/ipam_lib"
+	"github.com/nicklarsennz/terraform-provider-ipam/ipam_lib/backend"
 )
 
 func Provider() terraform.ResourceProvider {
@@ -29,7 +30,9 @@ type ipamClient struct {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	config := &ipam_lib.Config{}
+	config := &ipam_lib.Config{
+		Backend: backend.DYNAMO_DB,
+	}
 
 	client, err := ipam_lib.NewClient(config)
 	if err != nil {

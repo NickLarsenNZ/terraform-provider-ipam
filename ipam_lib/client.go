@@ -1,6 +1,9 @@
 package ipam_lib
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/nicklarsennz/terraform-provider-ipam/ipam_lib/backend"
+)
 
 type Config struct {
 	Backend string // DynamoDB
@@ -22,7 +25,7 @@ type Client interface {
 
 func NewClient(c *Config) (*Client, error) {
 	switch c.Backend {
-	case "DynamoDB":
+	case backend.DYNAMO_DB:
 		return nil, fmt.Errorf("Still working on the DynamoDB client")
 	default:
 		return nil, fmt.Errorf("Unsupported IPAM backend '%s'", c.Backend)
