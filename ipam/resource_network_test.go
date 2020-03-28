@@ -4,16 +4,12 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/nicklarsennz/terraform-provider-ipam/ipam_lib"
 	"testing"
 )
 
-// Todo: move this into a lib package
-type Network struct {
-	ID *int64
-}
-
 func TestIpamNetwork(t *testing.T) {
-	var network, updated_network Network
+	var network, updated_network ipam_lib.Network
 
 	prefix := "10.0.0.0/8"
 	rn := "ipam_network.test"
@@ -40,7 +36,7 @@ func TestIpamNetwork(t *testing.T) {
 	})
 }
 
-func testAccIpamNetworkExists(resource_name string, _ *Network) resource.TestCheckFunc {
+func testAccIpamNetworkExists(resource_name string, _ *ipam_lib.Network) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		rs, ok := s.RootModule().Resources[resource_name]
 		if !ok {
@@ -58,7 +54,7 @@ func testAccIpamNetworkExists(resource_name string, _ *Network) resource.TestChe
 	}
 }
 
-func testAccIpamNetworkIDUnchanged(network, updated_network *Network) resource.TestCheckFunc {
+func testAccIpamNetworkIDUnchanged(network, updated_network *ipam_lib.Network) resource.TestCheckFunc {
 	return func(_ *terraform.State) error {
 		if *network.ID != *updated_network.ID {
 			return fmt.Errorf("network was recreated")

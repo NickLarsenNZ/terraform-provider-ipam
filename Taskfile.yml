@@ -23,6 +23,8 @@ tasks:
       - ./**/*.go
       - go.mod
       - go.sum
+    env:
+      IPAM_BACKEND_DYNAMODB_TABLE: terraform-provider-ipam-acceptance-test
     cmds:
       - go test ./...
 
