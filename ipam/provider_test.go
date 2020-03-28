@@ -7,8 +7,9 @@ import (
 	"testing"
 )
 
+var testAccProvider = Provider().(*schema.Provider)
 var testProviders = map[string]terraform.ResourceProvider{
-	"ipam": Provider(),
+	"ipam": testAccProvider,
 }
 
 func TestProvider(t *testing.T) {
